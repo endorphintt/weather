@@ -1,0 +1,60 @@
+.falling_star {
+    position: absolute;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0px;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.star {
+    position: absolute;
+    left: 10vw;
+    top: -10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: white;
+    animation: falling_star 10s infinite 2s, pulsate 0.4s infinite;
+}
+
+.shine {
+    position: absolute;
+    left: calc(10vw - 15px);
+    top: -15px;
+    width: 20px;
+    height: 2px;
+    transform: rotate(45deg);
+    background-color: white;
+    animation: falling_star 10s infinite 2s;
+    filter: blur(2px);
+}
+
+@keyframes falling_star {
+    0% {
+        transform: translateX(0) translateY(0) rotate(45deg);
+    }
+    20% {
+        transform: translateX(80vw) translateY(103vh) rotate(45deg);
+    }
+    100% {
+        transform: translateX(80vw) translateY(103vh) rotate(45deg);
+    }
+}
+
+@keyframes pulsate {
+    0% {
+        width: 5px;
+        height: 5px;
+    }
+    50% {
+        width: 7px;
+        height: 7px;
+    }
+    100% {
+        width: 5px;
+        height: 5px;
+    }
+}
