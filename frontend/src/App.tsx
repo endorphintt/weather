@@ -2,6 +2,7 @@ import c from './App.module.scss'
 import { useEffect, useState } from 'react'
 import Intro from './components/intro/Intro'
 import Menu from './components/menu/Menu'
+import Header from './components/main/header/Header'
 
 function App() {
     const [loading, setLoading] = useState<boolean>(true)
@@ -18,6 +19,7 @@ function App() {
             ) : (
                 <div className={c.app__container}>
                     <Menu menu={menu} setMenu={() => setMenu(false)} />
+                    <Header openMenu={() => setMenu(true)} />
                 </div>
             )}
         </div>
