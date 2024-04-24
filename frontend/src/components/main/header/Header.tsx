@@ -1,5 +1,6 @@
 import React from 'react'
 import c from './Header.module.scss'
+import { getDayWeather } from '../../../functions'
 
 interface Props {
     openMenu: () => void
