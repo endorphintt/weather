@@ -11,6 +11,7 @@ import { SET_CITY } from '../../redux/consts'
 import Top from './top/Top'
 import DaySlider from './daySlider/daySlider'
 import TwoWeeks from './twoWeeks/TwoWeeks'
+import Squares from './squares/Squares'
 
 interface Props {}
 
@@ -41,6 +42,7 @@ const Main: React.FC<Props> = () => {
             <Top />
             <DaySlider />
             <TwoWeeks />
+            <Squares />
         </div>
     )
 }

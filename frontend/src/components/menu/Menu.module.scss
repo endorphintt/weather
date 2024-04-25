@@ -45,6 +45,9 @@
     font-size: 16px;
 }
 
+.items__container {
+    overflow-y: auto;
+}
 @media (max-width: 500px) {
     .menu {
         width: 100%;

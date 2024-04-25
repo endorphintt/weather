@@ -11,28 +11,11 @@ import { SET_CITY } from '../../../redux/consts'
 
 interface Props {
     city: CityCord
+    handleClick: (lat: number, lon: number) => void
 }
 
-const PopularItem: React.FC<Props> = ({ city }) => {
+const PopularItem: React.FC<Props> = ({ city, handleClick }) => {
     const [dayWeather, setDayWeather] = useState<DayWeather | null>(null)
-    const dispatch = useDispatch()
-    const handleClick = async (lat: number, lon: number) => {
-        try {
-            const dayData = await getDayWeather(lat, lon)
-            const twoWeekData = await getTwoWeeksForecast(lat, lon)
-            const hourlyForecast = await getHourlyForecast(lat, lon)
-            dispatch({
-                type: SET_CITY,
-                payload: {
-                    dayWeather: dayData,
-                    twoWeeksWeather: twoWeekData,
-                    fourDaysForecast: hourlyForecast,
-                },
-            })
-        } catch (error) {
-            console.error('error:', error)
-        }
-    }
 
     useEffect(() => {
         const getWeather = async (city: CityCord) => {

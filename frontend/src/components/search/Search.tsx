@@ -7,7 +7,7 @@ import { fetchCities } from '../../functions'
 import { CityCord } from '../../interfaces'
 
 interface Props {
-    onCityClick: (data: CityCord) => void
+    onCityClick: (lat: number, lon: number) => void
 }
 
 const Search: React.FC<Props> = ({ onCityClick }) => {
@@ -25,6 +25,11 @@ const Search: React.FC<Props> = ({ onCityClick }) => {
         fetchData()
     }, [query])
 
+    const OnCityButtonClick = (lat: number, lon: number) => {
+        onCityClick(lat, lon)
+        setQuery('')
+    }
+
     return (
         <div className={c.search}>
             <div className={c.search__input}>
@@ -39,7 +44,13 @@ const Search: React.FC<Props> = ({ onCityClick }) => {
             {results.length > 0 && query.length > 0 && (
                 <ul className={c.search__ul}>
                     {results.map((item, index) => (
-                        <button className={c.search__li} key={index}>
+                        <button
+                            onClick={() =>
+                                OnCityButtonClick(item.lat, item.lon)
+                            }
+                            className={c.search__li}
+                            key={index}
+                        >
                             {item.name}, {item.country}
                         </button>
                     ))}

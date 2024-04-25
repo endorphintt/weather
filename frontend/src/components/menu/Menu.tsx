@@ -1,8 +1,15 @@
+import { useDispatch } from 'react-redux'
 import { CITIES } from '../../constants'
-import { onCityClick } from '../../functions'
+import {
+    getDayWeather,
+    getHourlyForecast,
+    getTwoWeeksForecast,
+    onCityClick,
+} from '../../functions'
 import Search from '../search/Search'
 import c from './Menu.module.scss'
 import PopularItem from './PopularItem/PopularItem'
+import { SET_CITY } from '../../redux/consts'
 
 interface Props {
     setMenu: () => void
@@ -10,6 +17,25 @@ interface Props {
 }
 
 const Menu: React.FC<Props> = ({ setMenu, menu }) => {
+    const dispatch = useDispatch()
+    const handleClick = async (lat: number, lon: number) => {
+        try {
+            const dayData = await getDayWeather(lat, lon)
+            const twoWeekData = await getTwoWeeksForecast(lat, lon)
+            const hourlyForecast = await getHourlyForecast(lat, lon)
+            dispatch({
+                type: SET_CITY,
+                payload: {
+                    dayWeather: dayData,
+                    twoWeeksWeather: twoWeekData,
+                    fourDaysForecast: hourlyForecast,
+                },
+            })
+            setMenu()
+        } catch (error) {
+            console.error('error:', error)
+        }
+    }
     return (
         <div
             className={c.menu}
@@ -20,15 +46,21 @@ const Menu: React.FC<Props> = ({ setMenu, menu }) => {
             <div className={c.menu__header}>
                 <button className={c.menu__cancel} onClick={setMenu}></button>
             </div>
-            <Search onCityClick={onCityClick} />
-            <article className={c.popular}>
-                <p className={c.popular__title}>popular locations</p>
-                <div onClick={setMenu} className={c.popular__ul}>
-                    {CITIES.map((item) => (
-                        <PopularItem key={item.lat} city={item} />
-                    ))}
-                </div>
-            </article>
+            <Search onCityClick={handleClick} />
+            <div className={c.items__container}>
+                <article className={c.popular}>
+                    <p className={c.popular__title}>popular locations</p>
+                    <div onClick={setMenu} className={c.popular__ul}>
+                        {CITIES.map((item) => (
+                            <PopularItem
+                                handleClick={handleClick}
+                                key={item.lat}
+                                city={item}
+                            />
+                        ))}
+                    </div>
+                </article>
+            </div>
         </div>
     )
 }
