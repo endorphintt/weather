@@ -1,0 +1,70 @@
+.sort {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    &__button {
+        width: 150px;
+        height: 30px;
+        border-radius: 15px;
+        background-color: #669ac0;
+        color: white;
+        font-size: 18px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 20px;
+        position: relative;
+        transition: 0.5s;
+        &::after,
+        &::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 1px;
+            background-color: white;
+
+            top: 15px;
+        }
+        &::before {
+            transform: rotate(45deg);
+            right: 20px;
+        }
+        &::after {
+            transform: rotate(-45deg);
+            right: 10px;
+        }
+    }
+    &__list {
+        position: absolute;
+        right: 0;
+        top: 40px;
+        z-index: 100;
+        width: 150px;
+        background-color: #669ac0a3;
+        color: white;
+        font-size: 18px;
+        & li {
+            border-top: 1px solid white;
+            & button {
+                color: white;
+                background-color: transparent;
+                padding: 5px;
+                font-size: 18px;
+                transition: 0.5s;
+                &:hover {
+                    scale: 1.05;
+                }
+            }
+        }
+    }
+}
+
+.active {
+    &::before {
+        transform: rotate(-45deg);
+    }
+    &::after {
+        transform: rotate(45deg);
+    }
+}

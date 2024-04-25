@@ -1,4 +1,8 @@
-import { DayWeather, TwoWeeksForecastInterface } from '../interfaces'
+import {
+    DayWeather,
+    FourDaysWeatherForecast,
+    TwoWeeksForecastInterface,
+} from '../interfaces'
 import { WeatherAction } from './actions'
 import {
     ADD_TO_COMPARE,
@@ -7,20 +11,20 @@ import {
     SORT_BY,
 } from './consts'
 
-interface initialStateInterface {
+export interface initialStateInterface {
     currentCity: DayWeather | null
     twoWeeksForecast: TwoWeeksForecastInterface | null
     compareCitiesList: TwoWeeksForecastInterface[] | null
-    sortBy: string
     favoriteList: TwoWeeksForecastInterface[] | null
+    fourDaysWeatherForecast: FourDaysWeatherForecast | null
 }
 
 export const initialState = {
     currentCity: null,
     twoWeeksForecast: null,
     compareCitiesList: null,
-    sortBy: 'time',
     favoriteList: null,
+    fourDaysWeatherForecast: null,
 }
 
 export const weatherReducer = (
@@ -31,23 +35,26 @@ export const weatherReducer = (
         case SET_CITY:
             return {
                 ...state,
-                currentCity: action.payload,
-                favoriteList: [],
+                currentCity: action.payload.dayWeather,
+                twoWeeksForecast: action.payload.twoWeeksWeather,
+                compareCitiesList: [action.payload.twoWeeksWeather],
+                fourDaysWeatherForecast: action.payload.fourDaysForecast,
             }
         case ADD_TO_COMPARE:
             return {
                 ...state,
-                favoriteList: [...(state.favoriteList || []), action.payload],
+                compareCitiesList: [
+                    ...(state.favoriteList || []),
+                    action.payload,
+                ],
             }
         case REMOVE_FROM_COMPARE:
             return {
                 ...state,
-                favoriteList: (state.favoriteList || []).filter(
+                compareCitiesList: (state.favoriteList || []).filter(
                     (item) => item !== action.payload
                 ),
             }
-        case SORT_BY:
-            return state
         default:
             return state
     }

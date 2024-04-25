@@ -1,0 +1,47 @@
+.top {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 70px;
+    text-align: center;
+    color: white;
+    &__container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    &__name {
+        font-size: 32px;
+    }
+    &__degree {
+        font-size: 42px;
+        position: relative;
+        &::after,
+        &::before {
+            position: absolute;
+            content: '';
+            right: calc(50% - 30px);
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: white;
+        }
+        &::before {
+            background-color: #78aed4;
+            width: 6px;
+            height: 6px;
+            z-index: 1;
+            top: 2px;
+            right: calc(50% - 28px);
+        }
+    }
+    &__interval {
+        padding-top: 10px;
+        display: flex;
+        justify-content: center;
+        & p:last-child {
+            padding-left: 20px;
+        }
+    }
+}

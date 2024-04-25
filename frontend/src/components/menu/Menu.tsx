@@ -1,8 +1,8 @@
 import { CITIES } from '../../constants'
+import { onCityClick } from '../../functions'
 import Search from '../search/Search'
 import c from './Menu.module.scss'
 import PopularItem from './PopularItem/PopularItem'
-import { onCityClick } from '../../functions'
 
 interface Props {
     setMenu: () => void
@@ -23,7 +23,7 @@ const Menu: React.FC<Props> = ({ setMenu, menu }) => {
             <Search onCityClick={onCityClick} />
             <article className={c.popular}>
                 <p className={c.popular__title}>popular locations</p>
-                <div className={c.popular__ul}>
+                <div onClick={setMenu} className={c.popular__ul}>
                     {CITIES.map((item) => (
                         <PopularItem key={item.lat} city={item} />
                     ))}

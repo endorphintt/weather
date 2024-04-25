@@ -1,0 +1,51 @@
+.table {
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 20px;
+    background-color: #669ac0;
+    padding: 5px;
+
+    &__container {
+        overflow-y: auto;
+        height: 400px;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    &__title {
+        padding: 10px;
+        color: rgb(204, 202, 202);
+    }
+    &__item {
+        color: white;
+        display: flex;
+        align-items: center;
+        padding: 10px 10px;
+        border-top: 1px solid white;
+    }
+    &__day {
+        width: 80px;
+    }
+    &__img {
+        width: 30px;
+    }
+    &__temp {
+        padding-left: 20px;
+        width: 40px;
+    }
+    &__interval {
+        height: 10px;
+        border-radius: 5px;
+        background-color: #508ebc;
+        flex-grow: 1;
+        position: relative;
+        &_temp {
+            position: absolute;
+            height: 10px;
+            content: '';
+            border-radius: 5px;
+            background-color: #9dd4fe;
+            top: 0;
+        }
+    }
+}
